@@ -8,7 +8,7 @@ header {
     align-items: center;
     border-bottom: 1px solid #ddd;
 }
-header .login {
+header .logo {
     flex: 1;
 }
  header a {

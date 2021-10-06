@@ -1,5 +1,6 @@
 import React from 'react'
-import BtnRender from './BtnRender'
+import BtnRender from './BtnRender';
+
 function Productitem({product,isAdmin}) {
     return (
         <div className="product_card">
