@@ -1,4 +1,4 @@
-import React,{useState, useContext} from 'react'
+import React,{useContext, useState} from 'react'
 import {GlobalState} from '../../GlobalState'
 import Menu from './icon/menu.svg'
 import Close from './icon/close.svg'
@@ -13,10 +13,11 @@ function Header() {
     const [isLogged] = state.userAPI.isLogged;
     const [isAdmin] = state.userAPI.isAdmin;
     const [cart] = state.userAPI.cart
+    const [menu, setMenu] = useState(false)
 
     const logoutUser = async  () => {
           await axios.get('/user/logout')
-          localStorage.clear()
+          localStorage.removeItem('firstLogin')
           window.location.href = '/'
     }
 
@@ -38,10 +39,14 @@ function Header() {
             </>
         )
     }
+    
+    const styleMenu ={
+        left: menu ? 0 : '-100%'
+    }
     return (
         <div>
             <header>
-              <div className="menu">
+              <div className="menu" onClick={()=> setMenu(!menu)}>
                   <img src={Menu} alt=""  width="30"/>
               </div>
               <div className="logo">
@@ -49,7 +54,7 @@ function Header() {
                       <Link to='/'>{ isAdmin ? 'Admin': 'ASPHALT SHOP'}</Link>
                   </h1>
               </div>
-              <ul>
+              <ul style={styleMenu}>
                   <li><Link to='/'>{ isAdmin ? 'Products': 'SHOP'}</Link></li>
                   { isAdmin && adminRouter()}
 
@@ -57,7 +62,7 @@ function Header() {
                       isLogged ? loggedRouter() : <li><Link to='/login'>Login 🔅 Register</Link></li>
                   }
                   
-                  <li>
+                  <li onClick={()=> setMenu(!menu)}>
                       <img src={Close} alt=""  width="30"  className="menu"/>
                   </li>
               </ul>

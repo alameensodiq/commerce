@@ -10,7 +10,7 @@ function Register() {
     })
     
     const onChangeInput = e => {
-        const {name, value} =e.target;
+        const {name, value} = e.target;
         setUser({...user, [name]:value})
     }
 
@@ -18,9 +18,7 @@ function Register() {
         e.preventDefault()
         try{
             await axios.post('/user/register', {...user})
-
             localStorage.setItem('firstLogin', true)
-
             window.location.href='/';
 
         }catch(err) {

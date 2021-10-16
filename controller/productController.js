@@ -10,7 +10,7 @@ class APIfeatures{
     filtering(){
         const queryObj = {...this.queryString} //queryString = req.query
         const excludedFields = ['page','sort', 'limit']
-        excludedFields.forEach(el=> delete(queryObj[el]))
+        excludedFields.forEach(el=> delete(queryObj[el]))  
 
        
         let queryStr = JSON.stringify(queryObj)
@@ -30,7 +30,7 @@ class APIfeatures{
     }
     paginating(){
         const page = this.queryString.page * 1 || 1
-        const limit = this.queryString.limit * 1 || 3
+        const limit = this.queryString.limit * 1 || 6
         const skip = (page - 1)* limit;
         this.query = this.query.skip().limit(limit)
         return this
